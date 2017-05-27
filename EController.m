@@ -467,10 +467,20 @@
         {
 			// gnutar in Mac OS 10.3 and later can properly uncompress tbz archives
 			// The gnutar man page in 10.2 SAYS it has the option to uncompress tbz files, but it can't
-			if ([fm isExecutableFileAtPath: @"/usr/bin/gnutar"] == YES && os_version >= 1030)
+            if ([fm isExecutableFileAtPath: @"/usr/local/Cellar/gnu-tar/1.29_1/libexec/gnubin/tar"] == YES)
+            {
+                util_path = @"/usr/local/Cellar/gnu-tar/1.29_1/libexec/gnubin/tar";
+            }
+			else if ([fm isExecutableFileAtPath: @"/usr/bin/gnutar"] == YES && os_version >= 1030)
 			{
 				util_path = @"/usr/bin/gnutar";
 			}
+            else if ([fm isExecutableFileAtPath: @"/usr/bin/tar"] == YES && os_version < 1030)
+            {
+                util_path = @"/usr/bin/tar";
+            }
+            
+            
 			
             if ([fm isExecutableFileAtPath: util_path] == YES)
             {

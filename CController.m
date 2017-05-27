@@ -743,10 +743,14 @@
 		// Mac OS 10.1 cannot archive files as tbz in one step since bzip2 isn't on the system by default
 		if (os_version > 1010)
 		{
-			if (os_version >= 1030)
+			if (os_version >= 1030 && os_version < 1060)
 			{
 				compress_path = @"/usr/bin/gnutar";
-			}
+            }
+            else
+            {
+                compress_path = @"/usr/local/Cellar/gnu-tar/1.29_1/libexec/gnubin/tar";
+            }
 			
 			if ([[NSFileManager defaultManager] isExecutableFileAtPath: compress_path] == YES)
 			{				
